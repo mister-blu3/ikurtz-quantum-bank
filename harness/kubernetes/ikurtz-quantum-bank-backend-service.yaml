@@ -1,0 +1,29 @@
+service:
+  name: quantum-bank-backend
+  identifier: quantumbankbackend
+  tags:
+    ikurtz-sandbox: ""
+  serviceDefinition:
+    type: Kubernetes
+    spec:
+      manifests:
+        - manifest:
+            identifier: ikurtz_quantum_bank_backend
+            type: K8sManifest
+            spec:
+              store:
+                type: Github
+                spec:
+                  connectorRef: ikurtzgithub
+                  gitFetchType: Branch
+                  paths:
+                    - harness/kubernetes/ikurtz-quantum-bank-backend-deployment.yaml
+                  repoName: ikurtz-quantum-bank
+                  branch: main
+              valuesPaths:
+                - harness/kubernetes/ikurtz-values.yaml
+              skipResourceVersioning: false
+              enableDeclarativeRollback: true
+  gitOpsEnabled: false
+  orgIdentifier: sandbox
+  projectIdentifier: ikurtz_sandbox
